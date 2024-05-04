@@ -5,13 +5,23 @@ CXX=g++
 # 	-Wall Enables Compiler Warning Messagse 
 # 	-Wextra for Additional Warnings
 # 	-02 Optimizes Code
-CXXFLAGS=-Wall -Wextra -O2
+# 	-pedantic-errors Enforces C++ Language Standards.
+# 	-Werror (Warnings as Errors)
 
-run:
-	$(CXX) $(CXXFLAGS) -c -c src/main.cpp
-	$(CXX) $(CXXFLAGS) -o main main.o
+FLAGS=-std=c++23 -O2 -Wall -Weffc++ -Wextra -Wconversion -Wsign-conversion -Werror -pedantic-errors
+DEBUG=-std=c++23 -ggdb -Wall -Weffc++ -Wextra -Wconversion -Wsign-conversion -Werror -pedantic-errors
+debug:
+	$(CXX) $(DEBUG) src/main.cpp
+	gdb a.out
+.PHONY: run
+
+compile:
+	$(CXX) $(FLAGS) -c  src/main.cpp
+.PHONY: compile
+
+run: compile
+	$(CXX) $(FLAGS) -o main main.o
 	./main
-	rm -rf main main.o
 .PHONY: run
 
 clean:
