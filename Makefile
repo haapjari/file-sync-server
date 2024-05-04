@@ -11,6 +11,7 @@ run:
 	$(CXX) $(CXXFLAGS) -c -c src/main.cpp
 	$(CXX) $(CXXFLAGS) -o main main.o
 	./main
+	rm -rf main main.o
 .PHONY: run
 
 clean:
